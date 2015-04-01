@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <Context privileged="true" reloadable="true">
+      <WatchedResource>WEB-INF/web.xml</WatchedResource>
+      <Manager pathname=""/>
+      <Resource name="jdbc/CSE4481" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+                type="javax.sql.DataSource"
+                driverClassName="org.sqlite.JDBC"
+                url="jdbc:sqlite://home/adityam/workspace/Chat/helpdesk.db" />
+      <ResourceLink global="jdbc/EECS4481" name="jdbc/EECS4481" type="javax.sql.DataSource"/>
+    </Context>
