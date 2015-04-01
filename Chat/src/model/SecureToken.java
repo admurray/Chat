@@ -2,9 +2,7 @@ package model;
 
 import java.util.UUID;
 
-import org.apache.tomcat.jni.Time;
-
-public class SecureToken implements Runnable
+public class SecureToken
 {
 	private static final long secureTokenTimeout = 5; //in minutes
 	
@@ -23,7 +21,7 @@ public class SecureToken implements Runnable
 		this.setLatestTimestamp();
 	}
 	
-	public long getCreationTimeStamp()
+	public long getLatestTimestamp()
 	{
 		return latestTimestamp;
 	}
@@ -40,17 +38,18 @@ public class SecureToken implements Runnable
 
 	public String getToken()
 	{
-		return token;
+		return this.token;
 	}
 
-	public void setToken(String token)
+	public SecureToken setToken(String token)
 	{
 		this.token = token;
+		return this;
 	}
 	
-	public void setToken()
+	public SecureToken setToken()
 	{
-		this.setToken(SecurityUtils.hashSHA(UUID.randomUUID().toString()));
+		return this.setToken(SecurityUtils.hashSHA(UUID.randomUUID().toString()));
 	}
 
 	public static long getSecuretokentimeout()
@@ -66,8 +65,8 @@ public class SecureToken implements Runnable
 		 */
 		
 		long minsElapsed = System.currentTimeMillis()/(1000 * 60);
-		long difference =  minsElapsed - this.getCreationTimeStamp();
-		if(difference > 5)
+		long difference =  minsElapsed - this.getLatestTimestamp();
+		if(difference > SecureToken.secureTokenTimeout)
 			return false;
 		return true;
 	}
@@ -89,27 +88,8 @@ public class SecureToken implements Runnable
 		return this;
 	}
 	
-
-	public void run()
+	public String toString()
 	{
-		try
-		{
-			this.checkToken();
-		}
-		catch (InterruptedException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-	}
-	
-	public void checkToken() throws InterruptedException
-	{
-		while(true)
-		{
-			Thread.sleep((5*60*1000)+100);
-			this.setToken();
-			
-		}
+		return "Timestamp : "+this.getLatestTimestamp()+"	Value : "+this.getToken();
 	}
 }

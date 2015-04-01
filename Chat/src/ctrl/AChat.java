@@ -569,7 +569,8 @@ public class AChat extends HttpServlet
 		 * does not succeed.
 		 */
 		SecureToken token = (SecureToken) session.getAttribute(Chat.token);
-		String secTok = token.getToken();
+		String secTok = (token.setToken()).toString();
+		System.out.println(secTok);
 		response.getWriter().write(secTok);
 	}
 	

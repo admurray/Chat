@@ -113,7 +113,7 @@ function updateToken()
 		{
 			$('#secTok').html(responseText);
 		})
-	}, 1000*60)
+	}, 1000*6)
 }
 
 function getToken()

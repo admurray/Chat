@@ -8,8 +8,14 @@
         omit-xml-declaration="true" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link rel="StyleSheet" href="${pageContext.request.contextPath}/res/anon.css" type="text/css" title="cse4413" media="screen, print" />
-<title>HelpDesk</title>
+<link rel="StyleSheet"
+    href="${pageContext.request.contextPath}/res/style.css" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Montserrat'
+    rel='stylesheet' type='text/css' />
+<link
+    href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+    rel="stylesheet" />
+<title>SecureDesk</title>
 <script>
 
 $(document).ready(function() {                        // When the HTML DOM is ready loading, then execute the following function...
@@ -18,8 +24,50 @@ $(document).ready(function() {                        // When the HTML DOM is re
 </script>
 </head>
 <body>
-<div id="form_div">
-    <legend id="my_legend">Aditya's HelpDesk</legend>
+ <!--  Nav bar starts here -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" >SecureDesk</a>
+            </div>
+        </div>
+    </nav>
+    <!--  Nav bar ends here -->
+    
+    <div class="container">
+    <br/>
+        <div>
+            <div id="error">
+            </div>
+        </div>
+    <br/>
+    <br/>
+        
+        <div class="col-md-12 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+                <label for="chat_area">Welcome to SecureDesk</label>
+                <textarea id="somediv" readonly="readonly" class="form-control" rows="15" cols="150">${msg}</textarea>
+            </div>
+        </div>
+        
+         <div class="col-md-12 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+                <label for="msg"/>
+                <textarea class="form-control" id="msg" name="message" cols="150" rows="3" placeholder="Type Your Message" autofocus="autofocus"><jsp:text></jsp:text></textarea>
+            </div>
+         </div>
+         
+         <div class="col-md-12 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+                <button id="somebutton" class="btn btn-lg btn-success btn-block" name="send_msg" onclick="sendMessage()">SEND</button>
+            </div>
+         </div>
+        
+    </div>
+    
+    
+    
+    <!-- 
     <div id="divScroll" class="scroll">
         <div>
             <div id="error">
@@ -32,7 +80,7 @@ $(document).ready(function() {                        // When the HTML DOM is re
     <br/>
     <button  id="somebutton" name="send_msg" onclick="sendMessage()">SEND</button>
     <button  id="end_session" name="send_msg" onclick="endSession()">END SESSION</button>
-</div>
+ -->
 </body>
 </html>
 </jsp:root>

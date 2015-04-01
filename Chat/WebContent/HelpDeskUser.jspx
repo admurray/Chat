@@ -18,6 +18,7 @@
         getHelpers();
         getUsers();
         updateTransfers();
+        updateToken();
     });
     
 </script>

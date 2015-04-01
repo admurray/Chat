@@ -81,12 +81,7 @@ public class Chat extends HttpServlet
 				session.getAttribute(Chat.token));
 		session.setAttribute(Chat.token, secToken);
 		request.setAttribute("secTok", secToken.getToken());
-		
-		if(session.getAttribute(Chat.secThread) == null && secToken != null && 
-				(action == null || action.isEmpty()))
-		{
-			this.startSecThread(secToken, session);
-		}
+
 		/*
 		 * I can always get the information about the user from the sessionId
 		 * now that I am using the sessionId as the id for the users. The only
@@ -247,15 +242,4 @@ public class Chat extends HttpServlet
 		value = sanitizer.sanitize(value);
 		return value;
 	}
-	
-	private void startSecThread(SecureToken secToken, HttpSession session)
-	{
-		Thread secThread =  new Thread(secToken);
-		secThread.start();
-		session.setAttribute(Chat.secThread, secThread);
-		System.out.println("================================================");
-		System.out.println("The thread for the secure token was created.");
-		System.out.println("Thread Id : "+secThread.getId());
-	}
-
 }

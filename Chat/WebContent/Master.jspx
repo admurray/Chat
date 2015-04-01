@@ -8,14 +8,9 @@
 		omit-xml-declaration="true" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Aditya's Helpdesk</title>
+<title>SecureDesk</title>
 <script src="${pageContext.request.contextPath}/res/jquery-1.11.2.min.js"><jsp:text /></script>
 <script src="${pageContext.request.contextPath}/res/utils.js"><jsp:text /></script>
-<script>
-$(document).ready(function() {                        // When the HTML DOM is ready loading, then execute the following function...
-   updateToken();
-});
-</script>
 </head>
 <body>
     <div id="content">
