@@ -39,7 +39,12 @@ $(document).ready(function(){
         <div class="col-md-12 col-sm-12">
             <div class="col-md-12 col-sm-12">
                 <label id="error" for="chat_area">Welcome to SecureDesk</label>
-                <textarea id="somediv" readonly="readonly" class="form-control" rows="15" cols="150">${msg}</textarea>
+                <div class="panel panel-success chat-panel">
+                    <div id="scrollable_panel_chat" class="panel-body panel-height">
+                        <div id="somediv" >
+                        </div>                   
+                    </div>
+                </div>
             </div>
         </div>
         

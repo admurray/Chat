@@ -47,65 +47,75 @@
     
     <div class="container">
         <div class="col-md-12 col-sm-12">
-            <div class="col-md-8 col-sm-12">
+        <div>
+            <div class="col-md-9 col-sm-12">
                 <label id="error" for="chat_area">Welcome to SecureDesk</label>
-                <textarea id="somediv" readonly="readonly" class="form-control" rows="15" cols="150">${msg}</textarea>
-                            <label for="msg">
-                            <textarea class="form-control" id="msg" name="message" cols="150" rows="3" placeholder="Type Your Message" autofocus="autofocus"><jsp:text></jsp:text></textarea>
-                    <button id="somebutton" class="btn btn-lg btn-success btn-block" name="send_msg" onclick="sendMessage()">SEND</button> 
-            </label></div>
-            <div class="col-md-4 col-sm-12">
+                <div class="panel panel-success">
+                    <div id="scrollable_panel_chat" class="panel-body chat-panel">
+                        <div id="somediv" >
+                        </div>                   
+                    </div>
+                </div>
+                <label for="msg"/>
+                <textarea class="form-control" id="msg" name="message" cols="150" rows="3" placeholder="Type Your Message" autofocus="autofocus"><jsp:text></jsp:text></textarea>
+                <button id="somebutton" class="btn btn-lg btn-success btn-block" name="send_msg" onclick="sendMessage()">SEND</button> 
+           </div>
+           </div>
+            <div class="col-md-3 col-sm-12">
                 <br/>
-                <div class="col-md-12 col-sm-12">
-                    <div class="panel panel-success">
-                    <div class="panel-heading">OnlineClients</div>
-                    <div class="panel-body">
-                         <div>
-                            <div id="clients">
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-                 </div>
-                 
-                 <div class="col-md-12 col-sm-12">                 
-                 <div class="panel panel-success">
-                   <div class="panel-heading">OnlineHelpers</div>
-                   <div class="panel-body">
-                        <div id="helper_tag">
-                            <div id="helpers">
-                            </div>
-                        </div>
-                    </div>
-                    </div>                 
-                 </div>
-                 
-                 <div class="col-md-12 ol-sm-12">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">TransferUsers</div>
+                <div>
+                    <div class="panel panel-success users-panel">
+                        <div class="panel-heading">OnlineClients</div>
                         <div class="panel-body">
                             <div>
-                                <div id="transfer_users">
-                                 </div>
+                                <div id="clients">
+                                </div>
                             </div>
                         </div>
                     </div>
                  </div>
-             </div>
+                 
+                 <div>
+                    <div class="panel panel-success users-panel">
+                        <div class="panel-heading">OnlineHelpers</div>
+                        <div class="panel-body">
+                            <div id="helper_tag">
+                                <div id="helpers">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                       
+           </div>
         </div>
-</div>
- <div>
-    <div id="secTok">
-        <p><div id="secTokValue" hidden="hidden">${secToken}</div></p>
     </div>
-</div>
 
-<div>
-    <div id="transfer_users">
-    </div>
-</div>
-
-
+     
+	<div>
+	  <div class="container">
+	        <div class="col-md-11 col-sm-12">
+	            <div class="panel panel-success transfer-panel" >
+	                <div class="panel-heading">TransferUsers</div>
+	                <div class="panel-body">
+	                    <div>
+	                        <div id="transfer_users">
+	                         </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	 <div>
+	    <div id="secTok">
+	        <p><div id="secTokValue" hidden="hidden">${secToken}</div></p>
+	    </div>
+	</div>
+	
+	<div>
+	    <div id="transfer_users">
+	    </div>
+	</div>
 </body>
 </html>
 </jsp:root>

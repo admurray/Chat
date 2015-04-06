@@ -423,7 +423,7 @@ public class AChat extends HttpServlet
 			 * There can be only three categories of messages coming in. Anon
 			 * ------> Helper Helper ----> Anon Helper ----> Helper
 			 */
-			String message = sender.getName() + " : "
+			String message = "<b><font color=\"#0C0C38\" >"+sender.getName() + "</font></b> : "
 					+ Chat.validateInput("message", request, sanitizer);
 			if (convo != null)
 				convo.sendMessage(message);
@@ -433,7 +433,7 @@ public class AChat extends HttpServlet
 			Conversation convo = desk.getConversations().get(convoId);
 			convo.setResponseId(talkingToId);
 			User sender = convo.getUsrById(sessionId);
-			String message = sender.getName() + " : "
+			String message = "<b><font color=\"#0C0C38\" >"+sender.getName() + "</font></b> : "
 					+ Chat.validateInput("message", request, sanitizer);
 			if (convo != null)
 				convo.sendMessage(message);
@@ -488,7 +488,7 @@ public class AChat extends HttpServlet
 			// In this case form the well formed html.
 			Iterator<AnonymousUser> anonIter = helper.getAnons().values()
 					.iterator();
-			html += "TRANSFER<br/><select id=\"select_user\">\n\t";
+			html += "TRANSFER<select id=\"select_user\">\n\t";
 			while (anonIter.hasNext())
 			{
 				anon = anonIter.next();
@@ -508,7 +508,7 @@ public class AChat extends HttpServlet
 			HelpDeskUser friend = null;
 			Iterator<HelpDeskUser> helpIter = desk.getHelpDeskUsers().values()
 					.iterator();
-			html += "<br/>TO<br/><select id=\"select_helper\">\n\t";
+			html += "TO<select id=\"select_helper\">\n\t";
 			while (helpIter.hasNext())
 			{
 				friend = helpIter.next();
@@ -527,7 +527,7 @@ public class AChat extends HttpServlet
 
 		if (!html.equals(""))
 		{
-			html += "<br/><br/><button id=\"transfer_submit\" onclick=\"transferUser()\">Transfer</button>";
+			html += "<button id=\"transfer_submit\" onclick=\"transferUser()\">Transfer</button>";
 			html = "<div id=\"form_div\">" + html + "</div>";
 		}
 		response.getWriter().write(html);

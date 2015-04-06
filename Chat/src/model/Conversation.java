@@ -97,7 +97,7 @@ public class Conversation
 	public String sendMessage(String message)
 	{
 		//message = message.trim();
-		this.getConvo().append(message + "\n");
+		this.getConvo().append(message + "<br/>");
 		return "" + this.getConvo();
 	}
 

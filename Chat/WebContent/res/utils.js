@@ -66,7 +66,9 @@ function getMsgs()
 	url += "?action=GetMsgs";
 	url += "&token="+getToken();
 	$.get(url, function(responseText) {
-		$('#somediv').text(responseText);
+		$('#somediv').html(responseText);
+		var myDiv = document.getElementById("scrollable_panel_chat");
+		myDiv.scrollTop = myDiv.scrollHeight;
 	});
 }
 

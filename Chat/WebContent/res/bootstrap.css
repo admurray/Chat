@@ -6588,3 +6588,17 @@ button.close {
 width:100%;
 }
 
+.chat-panel {
+       height: 300px;
+       overflow-y:scroll;
+}
+
+.users-panel {
+	height:210px;
+	overflow-y:scroll;
+}
+
+.transfer-panel {
+	height:100px;
+}
+
