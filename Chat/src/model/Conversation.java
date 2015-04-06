@@ -1,6 +1,7 @@
 package model;
 
 import java.math.BigInteger;
+import java.security.InvalidParameterException;
 import java.security.MessageDigest;
 import java.util.NoSuchElementException;
 
@@ -95,7 +96,7 @@ public class Conversation
 
 	public String sendMessage(String message)
 	{
-		message = message.trim();
+		//message = message.trim();
 		this.getConvo().append(message + "\n");
 		return "" + this.getConvo();
 	}
@@ -128,6 +129,7 @@ public class Conversation
 	public static String createConvoId(String id1, String id2)
 	{
 		String convoId = null;
+		
 		if (id1 != null && id2 != null)
 		{
 			int comp = id1.compareTo(id2);

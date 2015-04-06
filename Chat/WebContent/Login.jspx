@@ -9,12 +9,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel="StyleSheet"
-    href="${pageContext.request.contextPath}/res/style.css" type="text/css" />
-<link href='http://fonts.googleapis.com/css?family=Montserrat'
-    rel='stylesheet' type='text/css' />
-<link
-    href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
-    rel="stylesheet" />
+    href="${pageContext.request.contextPath}/res/bootstrap.css" type="text/css" />
 
 <title>NeedHelp/Login</title>
 </head>
@@ -29,6 +24,11 @@
         </div>
     </nav>
     <!--  Nav bar ends here -->
+    
+    <div>
+        <br/>
+    </div>
+    
     <div class="container">
 
         <div class="col-md-12 col-sm-12">

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import ctrl.Chat;
 import dao.HelpDeskUserDao;
 
 public class Authentication
@@ -45,6 +46,8 @@ public class Authentication
 			HelpDeskUser helper = new HelpDeskUser();
 			ResultSet result = this.dao.getRecordByUsername(username);
 			String name = result.getString("name");
+			int salt = result.getInt("salt");
+			password = password+salt;
 			System.out.println("Unhashed Password : "+password);
 			password = Authentication.hashPassword(password);
 			System.out.println("Hashed Password : "+password);
@@ -53,7 +56,7 @@ public class Authentication
 			{
 				System.out.println("LOGIN was successfull, adding helper.");
 				helper.setName(name);
-				helper.setType(HelpDeskSession.hlprStr);
+				helper.setType(Chat.registeredUser);
 				helper.setUsername(username);
 				return helper;
 			}

@@ -15,14 +15,7 @@
 <body>
     <div id="content">
         <jsp:include page="/${view}.jspx"></jsp:include>
-    </div>
-    
-    <div>
-        <div id="secTok">
-            <p id="secTokValue" hidden="hidden">${secTok}</p>
-        </div>
-    </div>
-    
+    </div>    
 </body>
 </html>
 </jsp:root>

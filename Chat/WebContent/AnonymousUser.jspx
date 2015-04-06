@@ -9,17 +9,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel="StyleSheet"
-    href="${pageContext.request.contextPath}/res/style.css" type="text/css" />
-<link href='http://fonts.googleapis.com/css?family=Montserrat'
-    rel='stylesheet' type='text/css' />
-<link
-    href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
-    rel="stylesheet" />
+    href="${pageContext.request.contextPath}/res/bootstrap.css" type="text/css" />
 <title>SecureDesk</title>
 <script>
-
 $(document).ready(function() {                        // When the HTML DOM is ready loading, then execute the following function...
-   getMsgs();
+	runAnonCalls();
+});
+$(document).ready(function(){
+	newToken();
 });
 </script>
 </head>
@@ -33,19 +30,15 @@ $(document).ready(function() {                        // When the HTML DOM is re
         </div>
     </nav>
     <!--  Nav bar ends here -->
-    
-    <div class="container">
-    <br/>
-        <div>
-            <div id="error">
-            </div>
-        </div>
-    <br/>
-    <br/>
-        
+    <div>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+    <div class="container">        
         <div class="col-md-12 col-sm-12">
             <div class="col-md-12 col-sm-12">
-                <label for="chat_area">Welcome to SecureDesk</label>
+                <label id="error" for="chat_area">Welcome to SecureDesk</label>
                 <textarea id="somediv" readonly="readonly" class="form-control" rows="15" cols="150">${msg}</textarea>
             </div>
         </div>
@@ -64,23 +57,12 @@ $(document).ready(function() {                        // When the HTML DOM is re
          </div>
         
     </div>
-    
-    
-    
-    <!-- 
-    <div id="divScroll" class="scroll">
-        <div>
-            <div id="error">
-            </div>
+ 
+    <div>
+        <div id="secTok">
+            <p id="secTokValue" hidden="hidden">${secToken}</p>
         </div>
-        <textarea id="somediv" readonly="readonly" class="content" rows="20" cols="150">${msg}</textarea>
     </div>
-    <br/>
-    <textarea id="msg" name="message" cols="40" rows="4" placeholder="Type Your Message" autofocus="autofocus"><jsp:text></jsp:text></textarea>
-    <br/>
-    <button  id="somebutton" name="send_msg" onclick="sendMessage()">SEND</button>
-    <button  id="end_session" name="send_msg" onclick="endSession()">END SESSION</button>
- -->
 </body>
 </html>
 </jsp:root>

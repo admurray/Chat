@@ -27,8 +27,18 @@ function sendMessage()
 	url += "&token="+getToken();
 	document.getElementById("msg").value = "";
 	$.get(url, function(responseHtml){
-		$('#error').html(responseHtml);
+		if(isError(responseHtml))
+		{
+			$("#error").fadeOut();
+			$('#error').html(responseHtml).fadeIn();
+			setTimeout(revertToOriginal, 5000);
+		}
 	});
+}
+
+function revertToOriginal() {
+ 
+  $("#error").text("Welcome to SecureDesk").fadeIn();
 }
 
 function transferUser()
@@ -51,73 +61,100 @@ function endSession()
 
 function getMsgs()
 {
-	setInterval(function(){
-		var url = "";
-		url += "?action=GetMsgs";
-		url += "&token="+getToken();
-		$.get(url, function(responseText) {
-			$('#somediv').text(responseText);
-		});
-	}, 1000);
+
+	var url = "";
+	url += "?action=GetMsgs";
+	url += "&token="+getToken();
+	$.get(url, function(responseText) {
+		$('#somediv').text(responseText);
+	});
 }
 
 function getHelpers()
 {
-	setInterval(function()
-	{
-		 var url = "";
-		 url += "?action=GetHelpers";
-		 url += "&token="+getToken();
-         $.get(url, function(responseText) 
-         {
-        	 $('#helpers').html(responseText);
-         });
-     }, 3000);
+	 var url = "";
+	 url += "?action=GetHelpers";
+	 url += "&token="+getToken();
+     $.get(url, function(responseText) 
+     {
+    	 $('#helpers').html(responseText);
+     });
 }
 
 function getUsers()
 {
-	setInterval(function()
-	{
-		 var url = "";
-		 url += "?action=GetUsers";
-		 url += "&token="+getToken();
-         $.get(url, function(responseText) 
-         {
-        	 $('#clients').html(responseText);
-         });
-     }, 3000);
+	 var url = "";
+	 url += "?action=GetUsers";
+	 url += "&token="+getToken();
+     $.get(url, function(responseText) 
+     {
+    	 $('#clients').html(responseText);
+     });
 }
 
 function updateTransfers()
 {
-	setInterval(function()
-	{
-		 var url = "";
-		 url += "?action=UpdateTransfers";
-		 url += "&token="+getToken();
-         $.get(url, function(responseText) 
-         {
-        	 $('#transfer_users').html(responseText);
-         });
-     }, 3000);
+	 var url = "";
+	 url += "?action=UpdateTransfers";
+	 url += "&token="+getToken();
+     $.get(url, function(responseText) 
+     {
+    	 $('#transfer_users').html(responseText);
+     });
 }
 
 
 function updateToken()
 {
-	setInterval(function(){
-		var url="";
-		url += "?action=UpdateToken";
-		$.get(url, function(responseText)
-		{
-			$('#secTok').html(responseText);
-		})
-	}, 1000*6)
+	var url = "";
+	 url += "?action=UpdateToken";
+	 url += "&token="+getToken();
+    $.get(url, function(responseText) 
+    {
+   	 $('#secTokValue').text(responseText);
+    });
 }
 
 function getToken()
 {
 	 var tok = document.getElementById("secTokValue").innerHTML;
 	 return tok;
+}
+
+function runHelperCalls()
+{
+	var runHelper = function()
+	{
+		getMsgs()
+		getHelpers()
+		getUsers()
+		updateTransfers()
+		setTimeout(runHelper, 3000);
+	};
+	runHelper();
+}
+
+function runAnonCalls()
+{
+	var runAnon = function () 
+	{
+		getMsgs()
+		setTimeout(runAnon, 3000);
+	};
+	runAnon();
+}
+
+function newToken()
+{
+	var newTok = function()
+	{
+		updateToken()
+		setTimeout(newTok, 7200000);
+	};
+	newTok();
+}
+
+function isError(text)
+{
+	return (text.indexOf("ERROR")>-1);
 }

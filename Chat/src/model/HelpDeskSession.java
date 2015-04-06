@@ -3,6 +3,7 @@ package model;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import ctrl.Chat;
 import nl.captcha.Captcha;
 import dao.HelpDeskUserDao;
 
@@ -12,9 +13,6 @@ import dao.HelpDeskUserDao;
  */
 public class HelpDeskSession
 {
-	public static final String				hlprStr	= "helper";
-	public static final String				anonStr	= "anonymous";
-
 	private HashMap<String, HelpDeskUser>	helpDeskUsers;
 	private HashMap<String, AnonymousUser>	anonUsers;
 	private HashMap<String, Conversation>	conversations;
@@ -70,7 +68,7 @@ public class HelpDeskSession
 	{
 		// Check the name for special characters.
 		AnonymousUser anon = new AnonymousUser(sessionId, anonName, null,
-				HelpDeskSession.anonStr, null);
+				Chat.anonymousUser, null);
 		this.assignHelper(anon);
 		this.getAnonUsers().put(anon.getSessionId(), anon);
 		return true;

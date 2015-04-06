@@ -52,7 +52,7 @@ public class AChat extends HttpServlet
 		String sessionUsrType = (String) session.getAttribute(Chat.sesUsrType);
 		String talkingToId = (String) session.getAttribute("talkingTo");
 		String talkingToType = (String) session.getAttribute("talkingToType");
-
+		
 		/*
 		 * There are a six different types of actions that can take place
 		 * GetUsers GetHelpers GetMessages SendMessages EndSession LogOut These
@@ -206,6 +206,7 @@ public class AChat extends HttpServlet
 					helper = iter.next();
 					convoId = Conversation.createConvoId(helper.getSessionId(),
 							sessionId);
+					
 					if (desk.getConversations().containsKey(convoId))
 					{
 						convo = desk.getConversations().get(convoId);
@@ -277,7 +278,7 @@ public class AChat extends HttpServlet
 		 * user can talk only to the helper.
 		 */
 		session.setAttribute("talkingTo", userId);
-		session.setAttribute("talkingToType", HelpDeskSession.anonStr);
+		session.setAttribute("talkingToType", Chat.anonymousUser);
 		response.getWriter().write(html);
 	}
 
@@ -368,7 +369,7 @@ public class AChat extends HttpServlet
 		html = " <legend id=\"my_legend\">Aditya's HelpDesk| "
 				+ helper.getName() + "</legend>";
 		session.setAttribute("talkingTo", userId);
-		session.setAttribute("talkingToType", HelpDeskSession.hlprStr);
+		session.setAttribute("talkingToType", Chat.registeredUser);
 		response.getWriter().write(html);
 	}
 
@@ -395,20 +396,20 @@ public class AChat extends HttpServlet
 		{
 			User sessionOwner;
 			User talkingTo;
-			if (sessionUsrType.equals(HelpDeskSession.hlprStr))
+			if (sessionUsrType.equals(Chat.registeredUser))
 				sessionOwner = desk.getHelperById(sessionId);
-			else if (sessionUsrType.equals(HelpDeskSession.anonStr)
-					&& !talkingToType.equals(HelpDeskSession.anonStr))
+			else if (sessionUsrType.equals(Chat.anonymousUser)
+					&& !talkingToType.equals(Chat.anonymousUser))
 				sessionOwner = desk.getUserById(sessionId);
 			else
 				sessionOwner = null;
 			// =============
 			if (talkingToType != null
-					&& talkingToType.equals(HelpDeskSession.anonStr)
-					&& !sessionUsrType.equals(HelpDeskSession.anonStr))
+					&& talkingToType.equals(Chat.anonymousUser)
+					&& !sessionUsrType.equals(Chat.anonymousUser))
 				talkingTo = desk.getUserById(talkingToId);
 			else if (talkingToType != null
-					&& talkingToType.equals(HelpDeskSession.hlprStr))
+					&& talkingToType.equals(Chat.registeredUser))
 				talkingTo = desk.getHelperById(talkingToId);
 			else
 				talkingTo = null;
@@ -459,7 +460,9 @@ public class AChat extends HttpServlet
 		if (convoId != null && desk.getConversations().containsKey(convoId))
 		{
 			Conversation convo = desk.getConversations().get(convoId);
-			response.getWriter().write("" + convo.getConvo());
+			//String msg = "<div><font color=\"GREEN\">"+convo.getConvo()+"</font></div>";
+			//response.getWriter().write(msg);
+			response.getWriter().write(""+convo.getConvo());
 		}
 	}
 
@@ -485,7 +488,7 @@ public class AChat extends HttpServlet
 			// In this case form the well formed html.
 			Iterator<AnonymousUser> anonIter = helper.getAnons().values()
 					.iterator();
-			html += "TRANSFER<select id=\"select_user\">\n\t";
+			html += "TRANSFER<br/><select id=\"select_user\">\n\t";
 			while (anonIter.hasNext())
 			{
 				anon = anonIter.next();
@@ -505,7 +508,7 @@ public class AChat extends HttpServlet
 			HelpDeskUser friend = null;
 			Iterator<HelpDeskUser> helpIter = desk.getHelpDeskUsers().values()
 					.iterator();
-			html += "TO<select id=\"select_helper\">\n\t";
+			html += "<br/>TO<br/><select id=\"select_helper\">\n\t";
 			while (helpIter.hasNext())
 			{
 				friend = helpIter.next();
@@ -524,7 +527,7 @@ public class AChat extends HttpServlet
 
 		if (!html.equals(""))
 		{
-			html += "<button id=\"transfer_submit\" onclick=\"transferUser()\">Transfer</button>";
+			html += "<br/><br/><button id=\"transfer_submit\" onclick=\"transferUser()\">Transfer</button>";
 			html = "<div id=\"form_div\">" + html + "</div>";
 		}
 		response.getWriter().write(html);
@@ -569,8 +572,8 @@ public class AChat extends HttpServlet
 		 * does not succeed.
 		 */
 		SecureToken token = (SecureToken) session.getAttribute(Chat.token);
-		String secTok = (token.setToken()).toString();
-		System.out.println(secTok);
+		String secTok = (token.setToken()).getToken();
+		session.setAttribute(Chat.token, token);
 		response.getWriter().write(secTok);
 	}
 	
@@ -593,7 +596,7 @@ public class AChat extends HttpServlet
 		String talkingToId = (String) session.getAttribute("talkingTo");
 		String html = "";
 		if (sessionUsrType != null
-				&& sessionUsrType.equals(HelpDeskSession.anonStr)
+				&& sessionUsrType.equals(Chat.anonymousUser)
 				&& talkingToId == null)
 		{
 			AnonymousUser anon = desk.getUserById(session.getId());
@@ -601,17 +604,17 @@ public class AChat extends HttpServlet
 				session.setAttribute("talkingTo", anon.getHelper()
 						.getSessionId());
 			else
-				html = "<p><font color=\"red\">Please Wait for a Helper to come online</font></p>";
+				html = "<p><font color=\"red\">ERROR : Please Wait for a Helper to come online</font></p>";
 			talkingToId = (String) session.getAttribute("talkingTo");
 		} else if (sessionUsrType != null
-				&& sessionUsrType.equals(HelpDeskSession.hlprStr)
+				&& sessionUsrType.equals(Chat.registeredUser)
 				&& talkingToId == null)
 		{
 			HelpDeskUser helper = desk.getHelperById(session.getId());
 			if (helper.getAnons().size() >= 1)
-				html = "<p><font color=\"red\">Please make a selection to talk.</font></p>";
+				html = "<font color=\"red\">ERROR : Please make a selection to talk.</font>";
 			else
-				html = "<p><font color=\"red\">Please wait for a user to come online.</font></p>";
+				html = "<font color=\"red\">ERROR : Please wait for a user to come online.</font>";
 		} else
 		{
 			html = null;

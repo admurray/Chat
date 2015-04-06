@@ -41,7 +41,9 @@ public class Chat extends HttpServlet
 	public static final String				sesUsrType			= "sessionUserType";
 	public static final String				crntView			= "currentView";
 	public static final String				token				= "secToken";
-	public static final String 			secThread			= "secThread";
+	public static final String 				secThread			= "secThread";
+	public static final String 				registeredUser		= "helper";
+	public static final String 				anonymousUser		= "anonymous";
 
 	public void init() throws ServletException
 	{
@@ -79,8 +81,9 @@ public class Chat extends HttpServlet
 		SecureToken secToken = (SecureToken) (session.getAttribute(Chat.token) == null?
 				(new SecureToken()):
 				session.getAttribute(Chat.token));
+		
 		session.setAttribute(Chat.token, secToken);
-		request.setAttribute("secTok", secToken.getToken());
+		request.setAttribute(Chat.token, secToken.getToken());
 
 		/*
 		 * I can always get the information about the user from the sessionId
@@ -88,7 +91,6 @@ public class Chat extends HttpServlet
 		 * user that I need to store in the session is the user that the session
 		 * user is talking to.
 		 */
-
 		if (action != null && validActions.contains(action) && token != null &&
 				token.equals(secToken.getToken()))
 		{
@@ -141,9 +143,9 @@ public class Chat extends HttpServlet
 							// get the User instance.
 							view = "AnonymousUser";
 							session.setAttribute(sesUsrType,
-									HelpDeskSession.anonStr);
+									Chat.anonymousUser);
 							session.setAttribute("talkingToType",
-									HelpDeskSession.hlprStr);
+									Chat.registeredUser);
 						} else
 						{
 							System.out.println("NAME was probably invalid....");
@@ -159,8 +161,6 @@ public class Chat extends HttpServlet
 
 				if (path.equals(loginPage))
 				{
-					desk.printHelpers();
-					desk.printUsers();
 					String username = Chat.validateInput("username", request,
 							sanitizer);
 					String password = Chat.validateInput("password", request,
@@ -195,7 +195,7 @@ public class Chat extends HttpServlet
 							// get the User instance.
 							view = "HelpDeskUser";
 							session.setAttribute(sesUsrType,
-									HelpDeskSession.hlprStr);
+									Chat.registeredUser);
 						} else
 						{
 							System.out
