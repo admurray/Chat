@@ -7,11 +7,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+
 import javax.sql.DataSource;
-import java.util.UUID;
+
 
 public class HelpDeskUserDao
 {
@@ -19,13 +21,31 @@ public class HelpDeskUserDao
 	private DataSource ds;
 	
 	public HelpDeskUserDao() throws NamingException, SQLException, ClassNotFoundException {
-		 ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/CSE4481");				
+		 this.ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS4481");	 
 	}
 	
 	//Get a connection from the pool
 	private void createConnection() throws SQLException
 	{
+		
+		 System.out.println("DEBUG : Getting the connections ------------------");
+		 //BasicDataSource debug_bds = (BasicDataSource) this.ds;
+		 //System.out.println("DEBUG: "+debug_bds.getUrl()+"");
+		 System.out.println("DEBUG : "+ds.toString());
 		 conn = this.ds.getConnection();
+		 System.out.println(conn.getMetaData().getURL());
+		 System.out.println("===================================================");
+		 System.out.println("");
+		 System.out.println(conn.toString());
+		 System.out.println(conn.getCatalog());
+		 System.out.println(conn.getAutoCommit());
+		 System.out.println(conn.getMetaData().allTablesAreSelectable());
+		 System.out.println(conn.getMetaData().getDriverName());
+		 System.out.println(conn.getMetaData().getMaxConnections());
+		 System.out.println(conn.getMetaData().supportsStoredFunctionsUsingCallSyntax());
+		 System.out.println(conn.getMetaData().supportsStoredProcedures());
+		 System.out.println(conn.getMetaData().allProceduresAreCallable());
+		 
 		 conn.setAutoCommit(true);
 	}
 	
@@ -110,6 +130,7 @@ public class HelpDeskUserDao
 		
 		try
 		{
+			System.out.println("DEBUG : Attempting to create connection......-----------");
 			createConnection();
 			command = HelpDeskUserDao.conn.prepareStatement(getUserCommand);
 			ResultSet result = command.executeQuery();

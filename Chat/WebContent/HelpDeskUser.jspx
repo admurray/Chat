@@ -27,6 +27,10 @@
     	newToken();
     });
     
+    $(document).ready(function() {
+    	TransUpdate();
+    });
+    
 </script>
 </head>
 <body>

@@ -145,8 +145,6 @@ public class Conversation
 				return convoId;
 			} else
 			{	
-				System.out.println("Conversation creation : createConvoId(String, String)");
-				System.out.println("Conversation creation : Two IDs should never be equal");
 				return null;
 			}
 		} else

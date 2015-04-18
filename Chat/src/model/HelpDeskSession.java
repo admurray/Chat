@@ -90,7 +90,8 @@ public class HelpDeskSession
 				anonUser.setHelper(leastBusy);
 				leastBusy.addUserToHelp(anonUser);
 				return true;
-			} else
+			}
+			else
 			{
 				System.out
 						.println("No Helper present, please try again later.");
@@ -98,7 +99,8 @@ public class HelpDeskSession
 				return false;
 			}
 
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 			return false;
@@ -159,14 +161,16 @@ public class HelpDeskSession
 				{
 					System.out.println("Assigning helpers");
 					this.assignHelper(noHelper);
-				} else
+				}
+				else
 				{
 					// No user waiting.
 					return true;
 				}
 			}
 			return true;
-		} else
+		}
+		else
 			return false;
 	}
 
@@ -229,11 +233,13 @@ public class HelpDeskSession
 			{
 				System.out.println("Captcha entered was correct...");
 				System.out.println("Perfect this method can carry on....");
-			} else
+			}
+			else
 			{
 				return false;
 			}
-		} else
+		}
+		else
 		{
 			// No login should be possible without captcha acceptance.
 			return false;
@@ -259,7 +265,8 @@ public class HelpDeskSession
 			// method
 			// to assign the users.
 			// Set the session immediately.
-		} else
+		}
+		else
 		{
 			return false;
 		}

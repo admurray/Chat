@@ -37,7 +37,11 @@
     <servlet-class>ctrl.AChat</servlet-class>
     <load-on-startup>0</load-on-startup>
   </servlet>
-  
+  <!-- 
+  The following cmmeneted section has been replaced by the token
+  used for the XCRF prevention
+   -->
+  <!-- 
   <filter>
     <filter-name>CSRFPreventionFilter</filter-name>
     <filter-class>org.apache.catalina.filters.CsrfPreventionFilter</filter-class>
@@ -51,6 +55,10 @@
         <filter-name>CSRFPreventionFilter</filter-name>
         <url-pattern>/Chat/*</url-pattern>
     </filter-mapping>
+    
+    
+    -->
+    
     
     <!-- Require https for all configurations.  -->
     <security-constraint>
@@ -75,4 +83,10 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+    
+    <resource-ref>
+        <description>EECS4481 DS</description>
+        <res-ref-name>jdbc/EECS4481</res-ref-name>
+        <res-type>org.apache.tomcat.jdbc.pool.DataSource</res-type>
+    </resource-ref>
 </web-app>

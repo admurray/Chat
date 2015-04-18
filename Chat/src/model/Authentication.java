@@ -44,6 +44,7 @@ public class Authentication
 		try
 		{
 			HelpDeskUser helper = new HelpDeskUser();
+			System.out.println("Entering the database file....-----------");
 			ResultSet result = this.dao.getRecordByUsername(username);
 			String name = result.getString("name");
 			int salt = result.getInt("salt");

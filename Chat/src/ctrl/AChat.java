@@ -593,7 +593,7 @@ public class AChat extends HttpServlet
 		HelpDeskSession desk = (HelpDeskSession) this.getServletContext()
 				.getAttribute("deskSession");
 		String sessionUsrType = (String) session.getAttribute(Chat.sesUsrType);
-		String talkingToId = (String) session.getAttribute("talkingTo");
+		String talkingToId = null;//(String) session.getAttribute("talkingTo");
 		String html = "";
 		if (sessionUsrType != null
 				&& sessionUsrType.equals(Chat.anonymousUser)
@@ -608,7 +608,7 @@ public class AChat extends HttpServlet
 			talkingToId = (String) session.getAttribute("talkingTo");
 		} else if (sessionUsrType != null
 				&& sessionUsrType.equals(Chat.registeredUser)
-				&& talkingToId == null)
+				&& (String)session.getAttribute("talkingTo") == null)
 		{
 			HelpDeskUser helper = desk.getHelperById(session.getId());
 			if (helper.getAnons().size() >= 1)

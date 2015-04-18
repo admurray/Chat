@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-4 col-md-offset-4">
 
-                <form method="GET" class="form-signin" role="form" id="name-form" action="">
+                <form method="POST" class="form-signin" role="form" id="name-form" action="">
                     <h2 class="form-signin-heading">Enter Thy Name</h2>
                     
                     <label for="name" class="sr-only">Name</label> 
@@ -44,7 +44,7 @@
                         type="text" id="name" name="name" class="form-control"
                         placeholder="ThyName" /><br/>
                 </form>
-                <button form="name-form" class="btn btn-lg btn-success btn-block" type="submit" name="Checkout" value="checkout">Enter</button>
+                <button  form="name-form" class="btn btn-lg btn-success btn-block" type="submit" name="Checkout" value="checkout">Enter</button>
 
             </div>
             <!-- /container -->
