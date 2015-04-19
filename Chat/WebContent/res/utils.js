@@ -49,7 +49,6 @@ function transferUser()
 	url +="&newHelper="+document.getElementById('select_helper').value;
 	url += "&token="+getToken();
 	$.get(url, function(){})
-	updateTransfer();
 }
 
 function endSession()
@@ -131,6 +130,7 @@ function runHelperCalls()
 		getMsgs()
 		getHelpers()
 		getUsers()
+		updateTransfers()
 		setTimeout(runHelper, 3000);
 	};
 	runHelper();
@@ -154,16 +154,6 @@ function newToken()
 		setTimeout(newTok, 7200000);
 	};
 	newTok();
-}
-
-function TransUpdate()
-{
-	var transUp = function()
-	{
-		updateTransfers()
-		setTimeout(transUp, 15000);
-	}
-	transUp();
 }
 
 function isError(text)
